@@ -1,0 +1,16 @@
+table {
+  border: 1px solid black;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 1px solid black;
+}
+
+.scrolltable {
+  max-height: 700px;
+  overflow: overlay;
+}
