@@ -143,7 +143,11 @@
         document.querySelectorAll(".li_info").forEach((value) => {
             value.remove();
         })
-
+        li.forEach((value) => {
+          if (value.lbrr_name.includes(text)){
+            addToTable(value);
+          }
+        })
         
       });
     </script>
