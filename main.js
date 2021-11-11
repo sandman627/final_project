@@ -16,8 +16,7 @@ function CreateTable() {
             let colnum = keylist.length;
             let startnum = 3;  // 읽기 시작하는 도서관 번호
             let table_row_num = 10;  //도서관 목록에 나타나는 행의 갯수
-
-
+            
 
             console.log(colnum);
             console.log(data[1]["lbrry_name"]);
