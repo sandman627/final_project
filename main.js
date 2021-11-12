@@ -1,3 +1,59 @@
+function GetLbrryInfo(lbrryNum, lbrryFeature) {
+    const fs = require('fs')
+    fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
+        if (error) {
+            console.log(error)
+        }else{
+            const strings = JSON.parse(jsonString);
+            const header_row = strings["DESCRIPTION"];
+            const data = strings["DATA"];
+
+            let keylist = Object.keys(header_row);
+            let vallist = Object.values(header_row);
+            let colnum = keylist.length;
+
+            const lbrryData = data[lbrryNum];
+            
+            console.log(lbrryData);
+            console.log(lbrryFeature);
+
+            console.log(header_row[lbrryFeature.toUpperCase()]);
+            console.log(lbrryData[lbrryFeature.toLowerCase()]);
+        }
+    });
+}
+
+function GetTableCell(lbrryNum, tr, lbrryKey) {
+    const fs = require('fs')
+    fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
+        if (error) {
+            console.log(error)
+        }else{
+            const strings = JSON.parse(jsonString);
+            const header_row = strings["DESCRIPTION"];
+            const data = strings["DATA"];
+
+            let keylist = Object.keys(header_row);
+            let vallist = Object.values(header_row);
+            let colnum = keylist.length;
+
+            const lbrryData = data[lbrryNum];
+
+            let trInfoName = document.createElement("td");
+            let lbrry_info_name = document.createTextNode(header_row[lbrryKey.toUpperCase()]);
+            trInfoName.appendChild(lbrry_name_text);
+
+            let trInfoText = document.createElement("td");
+            let lbrry_info_text = document.createTextNode(lbrryData[lbrryKey.toLowerCase()]);
+            trInfoText.appendChild(lbrry_info_text);
+
+            tr.appendChild(trInfoName)
+            tr.appendChild(trInfoText)
+        }
+    });
+}
+
+
 function CreateTable() {
     const fs = require('fs')
     fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
@@ -29,11 +85,12 @@ function CreateTable() {
 
             // 표 머리글 행
 
+
             // 표 도서관 목록
+            let row = document.createElement("tr");
+
             for(let i = startnum; i < startnum + table_row_num && i < data.length; i++) { // startnum 부터 20 개 혹은 남은 데이터의 개수만큼 출력한다
-                
-                let row = document.createElement("tr");
-                
+            
                 for(let j = 0; j < colnum; j++){
                     let cell = document.createElement("td");  // 칸 만듬
                     let lbrryInfo = document.createTextNode(data[i]["lbrry_name"]);  //방금 만든 칸에 들어갈 문자열
@@ -51,4 +108,6 @@ function CreateTable() {
 }
 
 
-CreateTable();
+
+GetLbrryInfo(1, "lbrry_name");
+
