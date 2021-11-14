@@ -19,6 +19,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="style.css" />
+
     <title>서울시 도서관 정보</title>
   </head>
   <body>
@@ -94,6 +95,9 @@
         button.addEventListener("click", () => {
           console.log(obj);
           //클릭
+          alert("Getting info about " + obj.lbrr_name);
+          var detailed = window.open("detailed.html", '_blank');
+          alert("Data sent");
         });
         let table = document.querySelector("#info");
         table.appendChild(tr);

@@ -11,14 +11,18 @@
         <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title id="lbrry_name">asdf</title> <!--도서관 이름 보여주기--> 
+    <title></title> <!--도서관 이름 보여주기--> 
     <link rel="stylesheet" href="detailed_style.css">
-
+    
+    <!--네이버 지도
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wg1n2rlj58"></script>
+    -->
+
   </head>
 
   <body>
-    <h1 class="text-center">something</h1>  <!--도서관 이름-->
+    <h1 class="text-center" id="libname">something lib name</h1>  <!--도서관 이름-->
+    <span id="cInput"></span>
     
     <div class="center">
       <table class="center table table-bordered table-hover">
@@ -44,7 +48,7 @@
             <td>Library Closed Date</td>
             <td>libraryCloseDate</td>
           </tr>
-          <tr id="GuName&GuCode" onload="GetFeatureValue('gu_code')"><!--도서관 구 코드와 구 이름-->
+          <tr id="GuName&GuCode"><!--도서관 구 코드와 구 이름-->
           </tr>
           <tr id="Address"><!--도서관 주소-->
             <td></td>
@@ -67,22 +71,23 @@
 
     <!-- Optional JavaScript; choose one of the two! -->
     <script>
-      var map = new naver.maps.Map(document.getElementById('map'));
-      var map = new naver.maps.Map('map', {
-        mapTypeId: naver.maps.MapTypeId.HYBRID
-      });
+      alert("working");
+      window.onload = function () {
+        document.getElementsById("cInput").value = "sdfsdf";        
+      }
 
-      var mapOptions = new naver.maps.LatLng(33.3590628, 126.534361);
-      map.setCenter(mapOptions); // 중심 좌표 이동\
-      map.setZoom(13);     // 줌 레벨 변경
 
-      var seoul = new naver.maps.LatLngBounds(
-        new naver.maps.LatLng(37.42829747263545, 126.76620435615891),
-        new naver.maps.LatLng(37.7010174173061, 127.18379493229875));
 
-      map.fitBounds(seoul); // 좌표 경계 이동
-      map.panBy(new naver.maps.Point(10, 10)); // 오른쪽 아래로 10 픽셀 이동
+      // 지도
+      /*
 
+      var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+      };
+      var map = new naver.maps.Map('map', mapOptions);
+      */
+      alert("script all done");
     </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
