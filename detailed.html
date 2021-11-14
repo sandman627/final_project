@@ -11,7 +11,7 @@
         <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title></title> <!--도서관 이름 보여주기--> 
+    <title class="libName"></title> <!--도서관 이름 보여주기--> 
     <link rel="stylesheet" href="detailed_style.css">
     
     <!--네이버 지도-->
@@ -20,66 +20,151 @@
   </head>
 
   <body>
-    <h1 class="text-center" id="libname">something lib name</h1>  <!--도서관 이름-->
-    <span id="cInput"></span>
+    <h1 class="text-center libName" id="libname">something lib name</h1>  <!--도서관 이름-->
     
     <div class="center">
       <table class="center table table-bordered table-hover">
         <thead>
-          <td colspan="4"><strong>libraryName</strong></td>
+          <td colspan="4" id="tableName"><strong>libraryName</strong></td>
         </thead>
         <tbody>
           <tr id="Name&SeqNum"><!--도서관 구분명과 일련번호-->
-            <td>Library Type</td>
-            <td>libraryType</td>
-            <td>Library Sequence Number</td>
-            <td>librarySeqNum</td>
+            <td>도서관명</td>
+            <td id="libName" class="libName"></td>
+            <td>일련번호</td>
+            <td id="libSeqNum"></td>
           </tr>
           <tr id="Url&Phone"><!--도서관 홈페이지와 전화번호-->
-            <td>HomePage</td>
-            <td><a href="" target="_blank">Url of library</a></td>
-            <td>Phone</td>
-            <td>libraryPhone</td>
+            <td>홈페이지</td>
+            <td><a href="" target="_blank" id="libUrl">Url of library</a></td>
+            <td>전화번호</td>
+            <td id="libPhone">libraryPhone</td>
           </tr>
           <tr id="Opened&Closed"><!--도서관 개관 시간과 휴일-->
-            <td>Library Open Times</td>
-            <td>libraryOpTimes</td>
-            <td>Library Closed Date</td>
-            <td>libraryCloseDate</td>
+            <td>개관 시간</td>
+            <td id="libOpen">libraryOpTimes</td>
+            <td>폐관 시간</td>
+            <td id="libClose">libraryCloseDate</td>
           </tr>
           <tr id="GuName&GuCode"><!--도서관 구 코드와 구 이름-->
+            <td>도서관 구 이름</td>
+            <td id="libGuName"></td>
+            <td>도서관 구 코드</td>
+            <td id="libGuCode"></td>
           </tr>
           <tr id="Address"><!--도서관 주소-->
-            <td></td>
-            <td></td>
+            <td>도서관 주소</td>
+            <td colspan="3" id="libAddress"></td>
           </tr>
           <tr><!--도서관 위치 지도 네이버 로그인해서 API 승인 받으면 될듯 집가서 해야겟다-->
-            <td id="map">
-            </td>
+            <td id="map" colspan="4"></td>
           </tr>
           <tr id="Long&Lat"><!--도서관 위도와 경도-->
-            <td>Library Latitude</td>
-            <td></td>
-            <td>Library Longtitude</td>
-            <td></td>
+            <td>도서관 경도</td>
+            <td id="libXcord"></td>
+            <td>도서관 위도</td>
+            <td id="libYcord"></td>
           </tr>
         </tbody>
       </table>
     </div>
 
+    <div id="tableplace"></div>
 
     <!-- Optional JavaScript; choose one of the two! -->
     <script>
-      alert("working");
-      document.getElementsById("cInput").value = "sdfsdf";        
+      const libData = JSON.parse(localStorage.getItem("obj"));
+      const libDataLength = Object.keys(libData).length;
+
+
+      function GetLibInfo(featureName) {
+        return libData.featureName;
+      }
+
+      document.getElementsByClassName('libName').innerHTML = libData.lbrr_name;
+
+      function GetLbrryInfo(trID, lbrryFeature) {
+        let trInfoNameCell = document.createElement("td");
+        let lbrry_info_name = document.createTextNode();
+        trInfoNameCell.appendChild(lbrry_name_text);
+
+        let trInfoTextCell = document.createElement("td");
+        let lbrry_info_text = document.createTextNode();
+        trInfoTextCell.appendChild(lbrry_info_text);
+
+        document.getElementById("Name&SeqNum").appendChild(trInfoNameCell)
+        document.getElementById("Name&SeqNum").appendChild(trInfoTextCell)
+      }
+
+
+      function CreateTable1(){
+         // 표 생성
+        var div = document.getElementById("tableplace");
+        var tbl = document.createElement("table");
+        var tblHead = document.createElement("thead");
+        var tblBody = document.createElement("tbody");
+
+        // 표 머리글 행
+
+
+        // 표 도서관 목록
+        for(let i = 0; i < 4; i++) {
+          let row = document.createElement("tr");
+
+          for(let j = 0; j < 2; j++){
+            let cell = document.createElement("td");  // 칸 만듬
+            let lbrryInfo = document.createTextNode("asdf");  //방금 만든 칸에 들어갈 문자열
+            console.log(lbrryInfo);
+            cell.appendChild(lbrryInfo);  // 칸에 문자열을 넣음
+            row.appendChild(cell);  // 행에 칸을 넣음
+          }
+          tblBody.appendChild(row);  // 행을 표 밑에 붙임
+        }
+        tbl.appendChild(tblBody);  // 표에 표 몸통을 넣음
+        div.appendChild(tbl);  // html body에 표를 넣음
+        tbl.setAttribute("border", "1");  // 표의 설정
+      }
+
+
+      function CreateTable2(){
+         // 표 생성
+        var div = document.getElementById("tableplace");
+        var tbl = document.createElement("table");
+        var tblHead = document.createElement("thead");
+        var tblBody = document.createElement("tbody");
+
+        // 표 머리글 행
+
+
+        // 표 도서관 목록
+        for(let i = 0; i < libDataLength; i++) {
+          let row = document.createElement("tr");
+
+          for(let j = 0; j < 10; j++){
+            let cell = document.createElement("td");  // 칸 만듬
+            let lbrryInfo = document.createTextNode("asdf");  //방금 만든 칸에 들어갈 문자열
+            console.log(lbrryInfo);
+            cell.appendChild(lbrryInfo);  // 칸에 문자열을 넣음
+            row.appendChild(cell);  // 행에 칸을 넣음
+          }
+          tblBody.appendChild(row);  // 행을 표 밑에 붙임
+        }
+        tbl.appendChild(tblBody);  // 표에 표 몸통을 넣음
+        div.appendChild(tbl);  // html body에 표를 넣음
+        tbl.setAttribute("border", "1");  // 표의 설정
+      }
+
+      CreateTable();
+    
 
       // 지도
       var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        center: new naver.maps.LatLng(libData.xcnts, libData.ycnts),
         zoom: 10
       };
       var map = new naver.maps.Map('map', mapOptions);
-      alert("script all done");
+
+      // alert("script all done");
     </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

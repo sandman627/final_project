@@ -95,9 +95,10 @@
         button.addEventListener("click", () => {
           console.log(obj);
           //클릭
-          alert("Getting info about " + obj.lbrr_name);
+          //alert("Getting info about " + obj.lbrr_name);
+          localStorage.setItem("obj", JSON.stringify(obj));
           var detailed = window.open("detailed.html", '_blank');
-          alert("Data sent");
+          console.log("Data sent");
         });
         let table = document.querySelector("#info");
         table.appendChild(tr);
