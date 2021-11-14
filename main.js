@@ -1,3 +1,34 @@
+
+window.addEventListener("load", () => {
+fetch("library_seoul.json")
+    .then((response) => response.json())
+    .then((data) => {
+    data.DATA.forEach(addToList);
+    });
+});
+
+import {fs} from 'fs';
+
+function GetLbrryName(lbrryNum) {
+    fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
+        if (error) {
+            console.log(error)
+        }else{
+            const strings = JSON.parse(jsonString);
+            const data = strings["DATA"];
+            const lbrryData = data[lbrryNum];
+
+            console.log(lbrryData["lbrry_name"]);
+            document.getElementById("lbrry_name").innerText = lbrryData["lbrry_name"];
+            console.log(document.getElementById("lbrry_name").innerText);
+            console.log("");
+        }
+    });
+}
+
+
+/*
+
 function GetLbrryInfo(lbrryNum, lbrryFeature) {
     const fs = require('fs')
     fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
@@ -17,8 +48,7 @@ function GetLbrryInfo(lbrryNum, lbrryFeature) {
             console.log(lbrryData);
             console.log(lbrryFeature);
 
-            console.log(header_row[lbrryFeature.toUpperCase()]);
-            console.log(lbrryData[lbrryFeature.toLowerCase()]);
+            console.log(header_row[lbrryFeature.toUpperCase()] + ": " + lbrryData[lbrryFeature.toLowerCase()]);
         }
     });
 }
@@ -73,7 +103,6 @@ function CreateTable() {
             let startnum = 3;  // 읽기 시작하는 도서관 번호
             let table_row_num = 10;  //도서관 목록에 나타나는 행의 갯수
             
-
             console.log(colnum);
             console.log(data[1]["lbrry_name"]);
 
@@ -81,6 +110,7 @@ function CreateTable() {
             // 표 생성
             var body = document.getElementsByTagName("body")[0];
             var tbl = document.createElement("table");
+            var tblHead = document.createElement("thead");
             var tblBody = document.createElement("tbody");
 
             // 표 머리글 행
@@ -106,8 +136,44 @@ function CreateTable() {
         }
     });
 }
+      
+window.onload =  GetLbrryName(1);
+alert("af;ljfl; ikl'dgl/jagg");
 
 
+/*
 
-GetLbrryInfo(1, "lbrry_name");
+let libNum = 1;
+let libData;
+const fs = require('fs');
+fs.readFile('library_seoul.json', 'utf-8', (error, jsonString) => {
+  if (error) {
+    console.log(error)
+  }else{
+    const strings = JSON.parse(jsonString);
+    const header_row = strings["DESCRIPTION"];
+    const data = strings["DATA"];
+    
+    let keylist = Object.keys(header_row);
+    let vallist = Object.values(header_row);
+    let colnum = keylist.length;
 
+    libData = data[libNum]
+  }
+});
+
+function GetFeatureValue(feature) {
+  let trInfoName = document.createElement("td");
+  let lbrry_info_name = document.createTextNode("asdf");
+  trInfoName.appendChild(lbrry_name_text);
+  
+  let trInfoText = document.createElement("td");
+  let lbrry_info_text = document.createTextNode("asdf");
+  trInfoText.appendChild(lbrry_info_text);
+
+  alert("asdfasdf");
+  
+  // tr.appendChild(trInfoName)
+  // tr.appendChild(trInfoText)
+}
+*/
