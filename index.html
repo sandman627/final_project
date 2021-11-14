@@ -24,7 +24,7 @@
   <body>
     <div class="container">
       <div class="container my-3">
-        <h1 class="text-center">서울시 도서관</h1>
+        <h1 class="text-center">서울시 공공도서관</h1>
       </div>
       <div class="container">
         <div class="d-flex align-items-center mb-2 mt-2">
@@ -34,11 +34,9 @@
             id="search-input"
             placeholder="도서관 이름을 입력하세요"
           />
-          <button type="button" id="search" class="btn btn-primary ms-1 text-nowrap">
-             검색
-          </button>
+          <button type="button" id="search" class="btn btn-primary ms-1 text-nowrap">검색</button>
       </div>
-      <div class="li_table">
+      <div class="li_table" style="margin-bottom:50px;">
         <table>
           <colgroup>
             <col width="60%" />
@@ -94,6 +92,7 @@
         button.addEventListener("click", () => {
           console.log(obj);
           //클릭
+          send_detail(obj.lbrry_seq_no, obj.xcnts, obj.ydnts);
         });
         let table = document.querySelector("#info");
         table.appendChild(tr);
@@ -105,7 +104,7 @@
           tel_no: obj.tel_no,
           gu_code: obj.gu_code,
           lbrr_name: obj.lbrry_name,
-          lbrry_seq_no: obj.lbrry_se_name,
+          lbrry_seq_no: obj.lbrry_seq_no,
           fdrm_close_data: obj.fdrm_close_date,
           adres: obj.adres,
           ydnts: obj.ydnts,
@@ -150,7 +149,15 @@
         })
         
       });
+
+
+
+      function send_detail(idx, lat, lng){
+        //console.log(idx);
+        location.href = "detailed.html?lbrry_seq_no="+idx+"&latitude="+lat+"&longitude="+lng;
+      }
     </script>
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
