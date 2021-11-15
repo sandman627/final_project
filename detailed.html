@@ -57,6 +57,15 @@
                 //console.log(obj);
                 //var name = obj.lbrry_name;
                 //var open = obj.op_time;
+
+                if(obj.lbrry_seq_no == idx){
+                    console.log(obj);
+                    Object.keys(obj).forEach(feature => {
+                        if(obj[feature] == null){
+                            obj[feature] = "값이 존재하지 않음";
+                        }
+                    })
+                }
                 
                 addToTable(obj);
                 
